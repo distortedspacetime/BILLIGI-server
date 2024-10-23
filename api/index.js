@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-require('dotenv').config(); // .env 파일 로드
+require('dotenv').config();
+
 // 앱 생성
 const app = express();
 
@@ -33,7 +34,6 @@ const LostFoundSchema = new mongoose.Schema({
   description: { type: String, required: true },
   status: { type: String, enum: ['lost', 'found'], required: true },
   date: { type: Date, default: Date.now },
-  // reporter 필드 제거
 });
 
 const LostFound = mongoose.model('LostFound', LostFoundSchema);
