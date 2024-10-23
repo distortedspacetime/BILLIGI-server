@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB 연결
-mongoose.connect(process.env.DB_URI)
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB Atlas에 연결되었습니다.'))
   .catch((err) => console.error('MongoDB 연결 실패:', err));
 
