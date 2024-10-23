@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-require('dotenv').config(); // .env 파일 로드
+require('dotenv').config();
+
 // 앱 생성
 const app = express();
 
@@ -11,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB 연결
-mongoose.connect(process.env.DB_URI)
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB Atlas에 연결되었습니다.'))
   .catch((err) => console.error('MongoDB 연결 실패:', err));
 
@@ -33,7 +34,6 @@ const LostFoundSchema = new mongoose.Schema({
   description: { type: String, required: true },
   status: { type: String, enum: ['lost', 'found'], required: true },
   date: { type: Date, default: Date.now },
-  // reporter 필드 제거
 });
 
 const LostFound = mongoose.model('LostFound', LostFoundSchema);
