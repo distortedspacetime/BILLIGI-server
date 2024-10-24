@@ -11,10 +11,27 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// MongoDB 연결
+// MongoDB 연결 및 서버 시작
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('MongoDB Atlas에 연결되었습니다.'))
-  .catch((err) => console.error('MongoDB 연결 실패:', err));
+  .then(() => {
+    console.log('MongoDB Atlas에 연결되었습니다.');
+
+    // 서버 시작
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`서버가 포트 ${PORT}에서 실행 중입니다.`));
+  })
+  .catch((err) => {
+    console.error('MongoDB 연결 실패:', err);
+    
+    // 연결 실패 시 기본적인 오류 응답 설정
+    app.use((req, res, next) => {
+      res.status(500).json({ message: "MongoDB 연결 실패", error: err.message });
+    });
+
+    // 프로세스 종료
+    process.exit(1); // 연결 실패 시 프로세스를 종료
+  });
+
 
 // Item 모델 정의
 const ItemSchema = new mongoose.Schema({
