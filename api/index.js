@@ -9,7 +9,7 @@ const app = express();
 
 // 미들웨어 설정
 app.use(cors({
-     origin: 'https://billigi-client.vercel.app/'
+     origin: 'https://billigi-client.vercel.app'
    }));
 app.use(bodyParser.json());
 
