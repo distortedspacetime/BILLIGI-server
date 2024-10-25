@@ -9,9 +9,13 @@ const app = express();
 
 // 미들웨어 설정
 app.use(cors({
-     origin: 'https://billigi-client.vercel.app'
-   }));
-app.use(bodyParser.json());
+  origin: 'https://billigi-client.vercel.app',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+}));
+
+// bodyParser.json() 대신 express.json() 사용
+app.use(express.json());
 
 // MongoDB 연결 및 서버 시작
 mongoose.connect(process.env.MONGODB_URI)
