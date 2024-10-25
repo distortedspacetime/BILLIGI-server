@@ -134,6 +134,5 @@ app.post('/api/lostfound', async (req, res) => {
   }
 });
 
-
 //Vercel 배포용
 module.exports = app;
