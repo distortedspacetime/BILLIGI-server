@@ -8,7 +8,9 @@ require('dotenv').config();
 const app = express();
 
 // 미들웨어 설정
-app.use(cors());
+app.use(cors({
+     origin: 'https://billigi-client.vercel.app/'
+   }));
 app.use(bodyParser.json());
 
 // MongoDB 연결 및 서버 시작
